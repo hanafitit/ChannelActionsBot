@@ -32,6 +32,8 @@ while (await timer.WaitForNextTickAsync())
 
 async Task PingAsync()
 {
+    Console.WriteLine($"[Pinger] Sending request: {DateTimeOffset.UtcNow:O}");
+
     try
     {
         using var response = await client.GetAsync(
@@ -40,12 +42,11 @@ async Task PingAsync()
         );
 
         Console.WriteLine(
-            $"[Pinger] {DateTimeOffset.UtcNow:O} " +
-            $"{(int)response.StatusCode} {response.StatusCode}"
+            $"[Pinger] Response: {(int)response.StatusCode} {response.StatusCode}"
         );
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"[Pinger] Error: {ex.Message}");
+        Console.WriteLine($"[Pinger] Error: {ex}");
     }
 }
