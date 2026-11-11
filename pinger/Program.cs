@@ -20,6 +20,9 @@ Console.WriteLine($"[Pinger] Interval: {intervalSeconds}s");
 Console.WriteLine($"[Pinger] URL: {url}");
 Console.WriteLine($"[Pinger] DNS/HTTP diagnostic started");
 // First ping immediately
+Console.WriteLine($"[Pinger] OS: {Environment.OSVersion}");
+Console.WriteLine($"[Pinger] Runtime: {Environment.Version}");
+Console.WriteLine($"[Pinger] OpenSSL diagnostic starting");
 await PingAsync();
 Console.WriteLine("[Pinger] GetAsync completed");
 // Then ping periodically
