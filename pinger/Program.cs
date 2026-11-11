@@ -17,9 +17,11 @@ Console.WriteLine("[Pinger] Started");
 Console.WriteLine($"[Pinger] Target: {url}");
 Console.WriteLine($"[Pinger] Interval: {intervalSeconds}s");
 
+Console.WriteLine($"[Pinger] URL: {url}");
+Console.WriteLine($"[Pinger] DNS/HTTP diagnostic started");
 // First ping immediately
 await PingAsync();
-
+Console.WriteLine("[Pinger] GetAsync completed");
 // Then ping periodically
 using var timer = new PeriodicTimer(
     TimeSpan.FromSeconds(intervalSeconds)
