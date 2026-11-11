@@ -24,6 +24,12 @@ RUN dotnet publish Pinger.csproj \
 # ── Main application ──
 FROM denoland/deno:2.1.4
 
+USER root
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libssl3 ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 COPY deno.json ./
