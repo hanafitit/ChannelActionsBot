@@ -35,7 +35,7 @@ COPY --chmod=755 --from=pinger-build /out/Pinger /app/pinger/Pinger
 RUN deno cache main.ts
 
 ENV PORT=8000
-ENV PING_URL=https://channelactionsbot-e6rg.onrender.com/
+ENV PING_URL=http://127.0.0.1:8000/
 ENV PING_INTERVAL_SECONDS=30
 
 EXPOSE 8000
