@@ -32,21 +32,34 @@ while (await timer.WaitForNextTickAsync())
 
 async Task PingAsync()
 {
-    Console.WriteLine($"[Pinger] Sending request: {DateTimeOffset.UtcNow:O}");
+    using var cts = new CancellationTokenSource(
+        TimeSpan.FromSeconds(10)
+    );
+
+    Console.WriteLine("[Pinger] HTTP request started");
 
     try
     {
         using var response = await client.GetAsync(
             url,
-            HttpCompletionOption.ResponseHeadersRead
+            HttpCompletionOption.ResponseHeadersRead,
+            cts.Token
         );
 
         Console.WriteLine(
-            $"[Pinger] Response: {(int)response.StatusCode} {response.StatusCode}"
+            $"[Pinger] HTTP {(int)response.StatusCode} {response.StatusCode}"
         );
+    }
+    catch (OperationCanceledException)
+    {
+        Console.WriteLine("[Pinger] Request timed out after 10 seconds");
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"[Pinger] Error: {ex}");
+        Console.WriteLine($"[Pinger] HTTP error: {ex}");
+    }
+    finally
+    {
+        Console.WriteLine("[Pinger] Request finished");
     }
 }
