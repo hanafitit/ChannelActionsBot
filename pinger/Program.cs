@@ -23,6 +23,10 @@ Console.WriteLine($"[Pinger] DNS/HTTP diagnostic started");
 Console.WriteLine($"[Pinger] OS: {Environment.OSVersion}");
 Console.WriteLine($"[Pinger] Runtime: {Environment.Version}");
 Console.WriteLine($"[Pinger] OpenSSL diagnostic starting");
+// Ждём, пока Deno поднимет HTTP-сервер
+await Task.Delay(TimeSpan.FromSeconds(30));
+
+// Первый запрос
 await PingAsync();
 Console.WriteLine("[Pinger] GetAsync completed");
 // Then ping periodically
